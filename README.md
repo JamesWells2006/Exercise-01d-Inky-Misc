@@ -1,5 +1,5 @@
 # Exercise-01d-Inky-Misc
 
-# Your Name
+# James Wells
 
-# Your Github username
+# JamesWells2006
