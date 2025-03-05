@@ -16,58 +16,67 @@ This exercise will demonstrate the following in the example video:
 VAR time = -1 //  0 Morning, 1 Noon, 2 Night
 
 
-
-
 -> seashore
 
 == seashore ==
 You are sitting on the beach. 
 
-It is { advance_time() } 
+It is { advance_time() }. 
 
 + [Stroll down the beach] -> beach2
++ [Sit and watch the waves] -> waves
 -> DONE
 
 == beach2 ==
-This is further down the beach.
+You wander further down the beach.
 
-It is { advance_time() } 
-* { time == 1 } [pick up some seashells] -> shells 
-+ [Stroll back down to shore] -> dolphins
+It is { advance_time() }. 
+
+* { time == 1 } [Pick up some seashells] -> shells 
++ [Continue walking] -> dolphins
++ [Head back to the shore] -> seashore
 
 == shells ==
-You pick up the shells
+You pick up some seashells and admire their colors.
 -> beach2
 
-
 == dolphins ==
-You are on the shore watching dolphins play in the ocean. 
+You arrive at a spot where dolphins are playing in the waves. 
 
-It is { advance_time() } 
+It is { advance_time() }. 
 
-+ [Stroll down the ocean] -> sandbar
++ [Watch them jump] -> watch_dolphins
++ [Walk toward a sandbar] -> sandbar
 -> DONE
 
-== sandbar ==
-This is further down from the shore.
+== watch_dolphins ==
+You sit and watch as the dolphins leap gracefully. 
+-> dolphins
 
-It is { advance_time() } 
-* { time == 1 } [pet the dolphins] -> pet_dolphins 
-+ [Stroll back down to the beach] -> seashore
+== sandbar ==
+You wade toward a sandbar that stretches into the ocean.
+
+It is { advance_time() }. 
+
+* { time == 1 } [Pet the dolphins] -> pet_dolphins 
++ [Walk back toward the shore] -> seashore
++ [Look for seashells] -> shells
+
 
 == pet_dolphins ==
-You pet the dolphins.
+The dolphins swim up to you, and you gently pet them.
 -> sandbar
 
+== waves ==
+You sit on the shore, feeling the gentle ocean breeze.
+
+It is { advance_time() }. 
+
++ [Head down the beach] -> beach2
++ [Stay and relax] -> waves
 
 == function advance_time ==
-
-    ~ time = time + 1
-    
-    {
-        - time > 2:
-            ~ time = 0
-    }    
+    ~ time = (time + 1) % 3 
     
     {    
         - time == 0:
@@ -78,11 +87,6 @@ You pet the dolphins.
         
         - time == 2:
             ~ return "Night"
-    
     }
     
-        
     ~ return time
-    
-    
-    
